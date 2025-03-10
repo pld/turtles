@@ -1,0 +1,63 @@
+[package]
+name = "screensage"
+version = "0.1.0"
+edition = "2021"
+authors = ["Peter Lubell-Doughtie"]
+description = "A floating window for LLM chat on macOS"
+
+[dependencies]
+# GUI library for macOS - using iced for cross-platform support with macOS capabilities
+iced = { version = "0.10", features = ["canvas", "tokio", "debug"] }
+iced_native = "0.10"
+
+# Serialization and configuration
+serde = { version = "1.0", features = ["derive"] }
+serde_derive = "1.0"
+toml = "0.8"
+
+# Networking
+reqwest = { version = "0.11", features = ["json", "blocking", "stream"] }
+futures = "0.3"
+
+# Signal handling
+ctrlc = "3.4"
+
+# Async runtime and utilities
+tokio = { version = "1", features = ["full", "sync"] }
+
+# Logging
+log = "0.4"
+fern = { version = "0.6", features = ["colored"] }
+chrono = { version = "0.4", features = ["serde"] }
+
+# Data handling
+uuid = { version = "1.4", features = ["v4"] }
+serde_json = "1.0"
+
+# Utilities
+anyhow = "1.0"
+thiserror = "1.0"
+clap = { version = "4.4", features = ["derive"] }
+dirs = "5.0"
+
+[dev-dependencies]
+tempfile = "3.17.1"
+mockito = "1.2.0"
+criterion = "0.5"
+
+[[bench]]
+name = "performance_benchmarks"
+harness = false
+
+[package.metadata.bundle]
+name = "ScreenSage"
+identifier = "com.example.screensage"
+icon = ["resources/AppIcon.icns"]
+version = "1.0.0"
+copyright = "Copyright (c) 2023. All rights reserved."
+category = "Productivity"
+short_description = "A floating window for LLM chat on macOS"
+long_description = """
+ScreenSage is a floating window application for macOS that allows you to chat with 
+Ollama-powered large language models directly from your desktop.
+"""
