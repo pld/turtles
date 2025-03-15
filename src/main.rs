@@ -1,6 +1,6 @@
 use app::App;
 use iced::{Application, Settings};
-use log::{error, info};
+use log::info;
 
 mod app;
 mod config;

@@ -109,7 +109,7 @@ impl App {
             
             // Use ps command to get memory usage on macOS
             if let Ok(output) = Command::new("ps")
-                .args(&["-o", "rss=", "-p", &pid.to_string()])
+                .args(["-o", "rss=", "-p", &pid.to_string()])
                 .output() 
             {
                 if let Ok(mem_str) = String::from_utf8(output.stdout) {
@@ -767,7 +767,7 @@ impl Application for App {
                                         *state_guard = Some(receiver);
                                     }
                                 
-                                    return (Message::StreamChunk(chunk), ());
+                                    (Message::StreamChunk(chunk), ())
                                 }
                                 None => {
                                     // If the channel is closed, just return None

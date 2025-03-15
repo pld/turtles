@@ -26,7 +26,8 @@ fn conversation_truncate_benchmark(c: &mut Criterion) {
                 conversation
             },
             |mut conversation| {
-                black_box(conversation.truncate(100));
+                conversation.truncate(100);
+                black_box(());
             }
         )
     });

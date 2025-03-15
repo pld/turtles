@@ -31,7 +31,7 @@ fn main() {
             // Set executable permissions
             if cfg!(unix) {
                 Command::new("chmod")
-                    .args(&["+x", macos_dir.join("ScreenSage").to_str().unwrap()])
+                    .args(["+x", macos_dir.join("ScreenSage").to_str().unwrap()])
                     .status()
                     .unwrap();
             }

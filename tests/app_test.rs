@@ -1,6 +1,5 @@
 use screensage::App;
 use screensage::Config;
-use screensage::MessageRole;
 use iced::Application;
 
 #[test]

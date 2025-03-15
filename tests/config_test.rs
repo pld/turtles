@@ -1,6 +1,4 @@
 use screensage::Config;
-use std::path::PathBuf;
-use tempfile::tempdir;
 
 #[test]
 fn test_default_config() {

@@ -1,5 +1,4 @@
 use screensage::OllamaClient;
-use mockito::Server;
 
 #[tokio::test]
 async fn test_client_initialization() {

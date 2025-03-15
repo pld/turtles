@@ -30,6 +30,7 @@ pub struct CliArgs {
 
 /// Application configuration
 #[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Default)]
 pub struct Config {
     /// Window configuration
     pub window: WindowConfig,
@@ -101,16 +102,6 @@ pub struct LoggingConfig {
     pub max_files: u32,
 }
 
-impl Default for Config {
-    fn default() -> Self {
-        Self {
-            window: WindowConfig::default(),
-            ollama: OllamaConfig::default(),
-            conversation: ConversationConfig::default(),
-            logging: LoggingConfig::default(),
-        }
-    }
-}
 
 impl Default for WindowConfig {
     fn default() -> Self {

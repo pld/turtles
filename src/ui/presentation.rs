@@ -1,6 +1,6 @@
 use iced::{
     alignment, widget::{container, scrollable, Scrollable, text, Column, Container, Row},
-    Alignment, Color, Element, Length, Padding, theme, Theme
+    Alignment, Color, Element, Length, Padding, Theme
 };
 
 use crate::app::Message;

@@ -1,6 +1,6 @@
 use anyhow::{Context, Result};
 use chrono::{DateTime, Utc};
-use log::{debug, error, info, warn};
+use log::{debug, error, info};
 use serde::{Deserialize, Serialize};
 use std::fs::{self, File};
 use std::io::{BufReader, BufWriter};
@@ -170,7 +170,7 @@ impl Conversation {
             let path = entry.path();
             
             // Skip non-JSON files
-            if path.extension().map_or(false, |ext| ext == "json") {
+            if path.extension().is_some_and(|ext| ext == "json") {
                 match Self::load(&path) {
                     Ok(conversation) => conversations.push(conversation),
                     Err(e) => {

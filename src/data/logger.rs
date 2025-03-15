@@ -138,7 +138,7 @@ impl Logger {
             let path = entry.path();
             
             // Only process .log files
-            if path.extension().map_or(false, |ext| ext == "log") {
+            if path.extension().is_some_and(|ext| ext == "log") {
                 if let Ok(metadata) = fs::metadata(&path) {
                     if let Ok(modified) = metadata.modified() {
                         // Convert SystemTime to DateTime<Local>
@@ -305,7 +305,7 @@ mod tests {
         let log_files: Vec<_> = entries
             .filter_map(Result::ok)
             .filter(|entry| {
-                entry.path().extension().map_or(false, |ext| ext == "log")
+                entry.path().extension().is_some_and(|ext| ext == "log")
             })
             .collect();
         

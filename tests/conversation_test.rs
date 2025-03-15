@@ -1,7 +1,5 @@
 use screensage::{Conversation, Message, MessageRole};
 use chrono::Utc;
-use tempfile::tempdir;
-use std::fs;
 
 #[test]
 fn test_message_creation() {

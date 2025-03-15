@@ -11,7 +11,7 @@ mod tests {
         assert_eq!(config.window.width, 400);
         assert_eq!(config.window.height, 600);
         assert_eq!(config.window.opacity, 0.9);
-        assert_eq!(config.window.always_on_top, true);
+        assert!(config.window.always_on_top);
         assert_eq!(config.ollama.api_url, "http://localhost:11434");
         assert_eq!(config.ollama.default_model, "llama3.2");
         assert_eq!(config.conversation.max_length, 10000);

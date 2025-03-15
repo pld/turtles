@@ -1,11 +1,9 @@
-use anyhow::{Context, Result};
+use anyhow::Result;
 use iced::{
-    event, keyboard, mouse, subscription, window,
+    keyboard, mouse, subscription, window,
     Event, Point, Rectangle, Size, Subscription,
 };
 use iced::window::Position;
-use log::{debug, info};
-use std::collections::HashMap;
 
 use crate::app::Message;
 use crate::config::{Config, save_config};
