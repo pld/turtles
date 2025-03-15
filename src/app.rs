@@ -81,6 +81,24 @@ pub enum Message {
 }
 
 impl App {
+     // Add this method to the App implementation
+     fn reset_streaming_channel(&mut self) {
+        // Create a fresh channel
+        let (sender, receiver) = tokio::sync::mpsc::unbounded_channel::<String>();
+        
+        // Update the app state
+        self.chunk_sender = Some(sender);
+        
+        // Reset the receiver in the shared state
+        if let Ok(mut guard) = self.channel_state.lock() {
+            *guard = Some(receiver);
+        } else {
+            error!("Failed to lock channel_state mutex when resetting channel");
+        }
+        
+        debug!("Streaming channel has been reset");
+    }
+
     /// Update memory usage statistics
     pub fn update_memory_usage(&mut self) {
         // This is a simple implementation that gets the current process memory usage
@@ -385,9 +403,11 @@ impl Application for App {
                     
                     // Add an initial empty assistant message that we'll update with chunks
                     self.conversation.add_message(MessageRole::Assistant, "");
+
+                    self.reset_streaming_channel();
+                    self.is_streaming = true;
                     
                     let sender = self.chunk_sender.clone().unwrap();
-                    self.is_streaming = true;
                     
                     // Create a command to start processing the stream
                     let start_stream_command = Command::perform(
@@ -487,12 +507,19 @@ impl Application for App {
                 Command::perform(async {}, |_| Message::ScrollToBottom)
             }
             Message::EndStreaming => {
+                if !self.is_streaming {
+                    // Already handled the end of streaming, ignore this message
+                    info!("!is_streaming returning false");    
+                    return Command::none();
+                }
                 info!("Streaming completed");
-                
+
                 // Save the conversation to disk
                 if let Err(e) = self.conversation.save() {
                     error!("Failed to save conversation: {}", e);
                 }
+
+                self.reset_streaming_channel();
 
                 // Reset streaming state
                 self.is_streaming = false;
@@ -504,7 +531,7 @@ impl Application for App {
                 self.optimize_conversation_buffer();
                 
                 // Ensure we scroll to the bottom
-                Command::perform(async {}, |_| Message::ScrollToBottom)
+                Command::none()
             }
             
             Message::MessageReceived(response) => {
@@ -726,33 +753,33 @@ impl Application for App {
                             }
                         }
 
-                    if let Some(mut receiver) = receiver_option {
-                        info!("Waiting for chunk...");
+                        if let Some(mut receiver) = receiver_option {
+                            info!("Waiting for chunk...");
 
-                        // Wait for a chunk
-                        match receiver.recv().await {
-                            Some(chunk) => {
-                                info!("Received stream chunk: {}", chunk);
+                            // Wait for a chunk
+                            match receiver.recv().await {
+                                Some(chunk) => {
+                                    info!("Received stream chunk: {}", chunk);
 
-                                // Put the receiver back for next time
-                                {
-                                    let mut state_guard = state_clone.lock().unwrap();
-                                    *state_guard = Some(receiver);
+                                    // Put the receiver back for next time
+                                    {
+                                        let mut state_guard = state_clone.lock().unwrap();
+                                        *state_guard = Some(receiver);
+                                    }
+                                
+                                    return (Message::StreamChunk(chunk), ());
                                 }
-                            
-                                 return (Message::StreamChunk(chunk), ());
+                                None => {
+                                    // If the channel is closed, just return None
+                                    info!("Channel closed, ending stream");
+                                    (Message::EndStreaming, ())
+                                }
                             }
-                            None => {
-                                // If the channel is closed, just return None
-                                info!("Channel closed, ending stream");
-                                return (Message::EndStreaming, ());
-                            }
+                        } else {
+                            // If we're not streaming or the channel is closed, just return None
+                            (Message::EndStreaming, ())
                         }
                     }
-                    
-                    // If we're not streaming or the channel is closed, just return None
-                    (Message::ScrollToBottom, ())
-                  }
                 }
             );
             

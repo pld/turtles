@@ -1,7 +1,7 @@
 # ScreenSage User Guide
 
 > [!WARNING] 
-> This is experimental code meant as a proof of concept and may not be maintained. There is a known serious issue with the channel subscription.
+> This is experimental code meant as a proof of concept and may not be maintained.
 
 ## Introduction
 
