@@ -51,10 +51,10 @@ harness = false
 
 [package.metadata.bundle]
 name = "ScreenSage"
-identifier = "com.example.screensage"
+identifier = "org.ldee.screensage"
 icon = ["resources/AppIcon.icns"]
 version = "1.0.0"
-copyright = "Copyright (c) 2023. All rights reserved."
+copyright = "Copyright (c) 2025. All rights reserved."
 category = "Productivity"
 short_description = "A floating window for LLM chat on macOS"
 long_description = """

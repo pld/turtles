@@ -5,6 +5,7 @@ use std::process::Command;
 
 fn main() {
     // Only run the bundling logic when building for macOS in release mode
+    eprintln!("before conditional");
     if cfg!(target_os = "macos") && env::var("PROFILE").unwrap_or_default() == "release" {
         println!("cargo:rustc-env=TARGET_OS=macos");
         
@@ -67,7 +68,20 @@ fn main() {
     <key>NSHighResolutionCapable</key>
     <true/>
     <key>NSHumanReadableCopyright</key>
-    <string>Copyright © 2023. All rights reserved.</string>
+    <string>Copyright © 2025. All rights reserved.</string>
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+    <key>NSRequiresAquaSystemAppearance</key>
+    <false/>
+    <key>NSSupportsAutomaticTermination</key>
+    <true/>
+    <key>NSSupportsSuddenTermination</key>
+    <true/>
+    <key>LSEnvironment</key>
+    <dict>
+        <key>RUST_BACKTRACE</key>
+        <string>1</string>
+    </dict>
 </dict>
 </plist>"#;
         

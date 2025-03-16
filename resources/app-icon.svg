@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6A11CB" />
+      <stop offset="100%" stop-color="#2575FC" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="20" />
+      <feOffset dx="0" dy="10" result="offsetblur" />
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3" />
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- App icon background -->
+  <rect width="1024" height="1024" rx="180" ry="180" fill="url(#bgGradient)" />
+
+  <!-- Floating window frame -->
+  <rect x="212" y="262" width="600" height="500" rx="28" ry="28" fill="white" filter="url(#shadow)" />
+  
+  <!-- Window header -->
+  <rect x="212" y="262" width="600" height="50" rx="28" ry="28" fill="#F0F0F0" />
+  
+  <!-- Window control buttons -->
+  <circle cx="252" cy="287" r="10" fill="#FF6057" />
+  <circle cx="282" cy="287" r="10" fill="#FFBD2E" />
+  <circle cx="312" cy="287" r="10" fill="#27C93F" />
+  
+  <!-- Chat bubbles -->
+  <!-- AI bubble 1 -->
+  <rect x="252" y="342" width="280" height="80" rx="20" ry="20" fill="#F0F6FF" />
+  <circle cx="272" cy="332" r="20" fill="#5B8AF9" />
+  
+  <!-- User bubble -->
+  <rect x="492" y="452" width="280" height="80" rx="20" ry="20" fill="#E9FFF8" />
+  <circle cx="752" cy="442" r="20" fill="#56D8B9" />
+  
+  <!-- AI bubble 2 -->
+  <rect x="252" y="562" width="280" height="80" rx="20" ry="20" fill="#F0F6FF" />
+  <circle cx="272" cy="552" r="20" fill="#5B8AF9" />
+  
+  <!-- Text lines in bubbles (simplified representation) -->
+  <line x1="282" y1="362" x2="492" y2="362" stroke="#C0C0FF" stroke-width="12" stroke-linecap="round" />
+  <line x1="282" y1="392" x2="452" y2="392" stroke="#C0C0FF" stroke-width="12" stroke-linecap="round" />
+  
+  <line x1="522" y1="472" x2="732" y2="472" stroke="#A8E6D5" stroke-width="12" stroke-linecap="round" />
+  <line x1="522" y1="502" x2="692" y2="502" stroke="#A8E6D5" stroke-width="12" stroke-linecap="round" />
+  
+  <line x1="282" y1="582" x2="492" y2="582" stroke="#C0C0FF" stroke-width="12" stroke-linecap="round" />
+  <line x1="282" y1="612" x2="452" y2="612" stroke="#C0C0FF" stroke-width="12" stroke-linecap="round" />
+  
+  <!-- Floating effect elements -->
+  <circle cx="162" cy="462" r="30" fill="rgba(255, 255, 255, 0.3)" />
+  <circle cx="862" cy="562" r="40" fill="rgba(255, 255, 255, 0.3)" />
+  <circle cx="712" cy="662" r="20" fill="rgba(255, 255, 255, 0.3)" />
+  <circle cx="312" cy="762" r="25" fill="rgba(255, 255, 255, 0.3)" />
+</svg>

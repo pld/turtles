@@ -1,13 +1,13 @@
 # ScreenSage User Guide
 
+<img src="https://github.com/pld/turtles/blob/main/resources/app-icon.svg" alt="screensage icon" width="128px">
+
 > [!WARNING] 
 > This is experimental code meant as a proof of concept and may not be maintained.
 
 ## Introduction
 
 ScreenSage is a floating window application for macOS that allows you to chat with Ollama-powered large language models directly from your desktop. It provides a clean, minimalist interface that stays out of your way while giving you quick access to AI assistance.
-
-<img src="https://github.com/pld/turtles/blob/main/docs/screensage.png" alt="UI convesation screenshot" width="300px">
 
 ## Installation
 
@@ -35,6 +35,8 @@ ScreenSage is a floating window application for macOS that allows you to chat wi
     ```sh
     cargo build --release
     ```
+
+<img src="https://github.com/pld/turtles/blob/main/docs/screensage.png" alt="UI convesation screenshot" width="300px">
 
 ### Release Installation Steps
 
